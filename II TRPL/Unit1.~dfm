@@ -1,0 +1,69 @@
+object Form1: TForm1
+  Left = 273
+  Top = 170
+  Width = 537
+  Height = 480
+  Caption = 'MENU UTAMA'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 512
+    Height = 38
+    Alignment = taCenter
+    Caption = 'PROGRAM APLIKASI PEMBELAJARAN'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object MainMenu1: TMainMenu
+    Left = 24
+    Top = 64
+    object MENU1: TMenuItem
+      Caption = 'MENU'
+      object DATAGURU1: TMenuItem
+        Caption = 'GURU'
+        OnClick = DATAGURU1Click
+      end
+      object MATAPELAJARAN1: TMenuItem
+        Caption = 'MATA PELAJARAN'
+        OnClick = MATAPELAJARAN1Click
+      end
+      object JADWALPERLAJARAN1: TMenuItem
+        Caption = 'JADWAL PERLAJARAN'
+      end
+      object NILAI1: TMenuItem
+        Caption = 'NILAI'
+        OnClick = NILAI1Click
+      end
+      object PROGRAMSTUDI1: TMenuItem
+        Caption = 'PROGRAM STUDI'
+      end
+      object KELAS1: TMenuItem
+        Caption = 'KELAS'
+      end
+      object JURUSAN1: TMenuItem
+        Caption = 'JURUSAN'
+      end
+      object SISWA1: TMenuItem
+        Caption = 'SISWA'
+      end
+    end
+    object KELUAR1: TMenuItem
+      Caption = 'KELUAR'
+      OnClick = KELUAR1Click
+    end
+  end
+end

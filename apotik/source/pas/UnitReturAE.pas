@@ -1,0 +1,99 @@
+unit UnitReturAE;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, UnitDMConn, DB, ZAbstractRODataset,
+  ZAbstractDataset, ZAbstractTable, ZDataset, Mask, Buttons, sBitBtn;
+
+type
+  TfrmReturAE = class(TForm)
+    cmbObat: TDBLookupComboBox;
+    cmbPbf: TDBLookupComboBox;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label9: TLabel;
+    Label7: TLabel;
+    Label6: TLabel;
+    Label1: TLabel;
+    DS: TDataSource;
+    edtJumlah: TDBEdit;
+    BtnSimpan: TBitBtn;
+    btnBatal: TBitBtn;
+    procedure AddMode();
+    procedure EditMode();
+    procedure btnBatalClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnSimpanClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    FState : Integer;
+  end;
+
+var
+  frmReturAE: TfrmReturAE;
+
+implementation
+
+{$R *.dfm}
+uses UnitObat, UnitPbf;
+
+procedure TfrmReturAE.btnBatalClick(Sender: TObject);
+begin
+  ModalResult := mrAbort;
+end;
+
+procedure TfrmReturAE.AddMode();
+begin
+  dmconn.ZTblRetur.Append;
+  dmconn.ZTblRetur.FieldByName('tgl_retur').Value := FormatDateTime('yyyy-MM-dd', now());
+end;
+
+procedure TfrmReturAE.EditMode();
+begin  
+  dmconn.ZTblRetur.Edit;
+end;
+
+procedure TfrmReturAE.FormShow(Sender: TObject);
+begin
+  If(FState = 2) then
+  begin
+    Caption := 'Edit Retur';
+    EditMode();
+  end
+  else
+  begin
+    Caption := 'Tambah Retur';
+    AddMode();
+  end;
+end;
+
+procedure TfrmReturAE.btnSimpanClick(Sender: TObject);
+begin
+  if(cmbObat.KeyValue = null) or (cmbpbf.KeyValue = null) or (edtjumlah.Text = '') then
+    MessageDlg('Lengkapi data terlebih dahulu', mtwarning, [mbok], 0)
+  else
+  begin
+    dmconn.ZTblRetur.Post;
+    if(FState = 3) then
+    begin
+      MessageDlg('Data sudah disimpan', mtinformation, [mbok],0);
+      addmode();
+    end
+    else
+      ModalResult := mrOK;
+  end;
+
+
+end;
+
+procedure TfrmReturAE.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  dmconn.ZTblRetur.CancelUpdates;
+end;
+
+end.

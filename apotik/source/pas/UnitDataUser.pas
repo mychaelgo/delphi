@@ -1,0 +1,57 @@
+unit UnitDataUser;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
+  ZAbstractTable, ZDataset, Grids, DBGrids, UnitDMConn, Buttons, sBitBtn;
+
+type
+  TfrmDataUser = class(TForm)
+    DBGrid1: TDBGrid;
+    DS: TDataSource;
+    ZQry: TZQuery;
+    btnTambah: TBitBtn;
+    btnHapus: TBitBtn;
+    btnTutup: TBitBtn;
+    procedure btnTutupClick(Sender: TObject);
+    procedure btnTambahClick(Sender: TObject);
+    procedure btnHapusClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDataUser: TfrmDataUser;
+
+implementation
+
+{$R *.dfm}
+uses UnitDataUserAE;
+
+procedure TfrmDataUser.btnTutupClick(Sender: TObject);
+begin
+  close();
+end;
+
+procedure TfrmDataUser.btnTambahClick(Sender: TObject);
+begin
+  frmDataUserAE.ShowModal;
+end;
+
+procedure TfrmDataUser.btnHapusClick(Sender: TObject);
+begin
+  if(MessageDlg('Hapus Data?', mtconfirmation, [mbYes, mbNo], 0) = mrYes) then
+    zqry.Delete;
+end;
+
+procedure TfrmDataUser.FormCreate(Sender: TObject);
+begin
+  zqry.Active := true;
+end;
+
+end.

@@ -1,0 +1,28 @@
+unit UDM;
+
+interface
+
+uses
+  SysUtils, Classes, DB, ADODB, XPMan, RpDefine, RpRave,
+  RpBase, RpSystem;
+
+type
+  TDM = class(TDataModule)
+    ADOConn: TADOConnection;
+    XPManifest1: TXPManifest;
+    RvProject: TRvProject;
+    RvSystem1: TRvSystem;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{$R *.dfm}
+
+end.
